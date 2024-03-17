@@ -1,6 +1,6 @@
 package assignment2.exercise3
 
-val sumOfNumbers: (Int) -> Pair<String, Int> = { n ->
+val sumOfNumbersLambda: (Int) -> Pair<String, Int> = { n ->
     fun sumHelper(n: Int, acc: String, sum: Int): Pair<String, Int> {
         return if (n <= 0) {
             Pair(acc, sum)
@@ -21,7 +21,7 @@ fun getInputAndCalculateSum() {
                 println("Vui lòng nhập số nguyên dương.")
                 return
             }
-            val (sequence, result) = sumOfNumbers(number)
+            val (sequence, result) = sumOfNumbersLambda(number)
             println("Các số tự nhiên nhỏ hơn hoặc bằng $number là: $sequence = $result")
         } catch (e: NumberFormatException) {
             println("Vui lòng nhập một số nguyên dương hợp lệ.")
