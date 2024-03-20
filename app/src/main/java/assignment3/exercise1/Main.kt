@@ -23,7 +23,7 @@ fun main() {
             1 -> {
                 println("Add new person:")
                 do {
-                    println("Enter `1` to add student, enter `2` to add teacher: ")
+                    println("Enter \"1\" to add student, enter \"2\" to add teacher: ")
                     val option = scanner.nextInt();
                     if (option == 1) {
                         val student = Student()
@@ -37,33 +37,34 @@ fun main() {
                 } while (option != 1 && option != 2)
             }
 
-            2 -> TODO()
-            3 -> {
-                println("Delete person:")
-                do {
-                    println("Enter `1` to delete student, enter `2` to delete teacher: ")
-                    val option = scanner.nextInt();
-                    if (option == 1) {
-                        val student = Student()
-                        students.add(student)
-                    } else if (option == 2) {
-                        val teacher = Teacher()
-                        teacher.inputInfo()
-                        teachers.add(teacher)
-                    }
-                } while (option != 1 && option != 2)
-            }
+            2 -> editPerson(students,teachers,scanner)
+            3 -> deletePerson(students,teachers,scanner)
             4 -> TODO()
-            5 ->{
+            5 -> {
+                if (students.isEmpty()) {
+                    println("Empty student data")
+                } else {
+                    println("+-------------+----------------------+----------+------------+-----------------------+------------------+------+-------------+")
+                    println("| ID          | Name                 | Gender   | DOB        | Address               |  Email           | GPA  | Scholarship |")
+                    println("+-------------+----------------------+----------+------------+-----------------------+------------------+------+-------------+")
+                    for (student in students) {
+                        student.showInfo()
+                    }
+                }
+
+            }
+
+            6 -> if (teachers.isEmpty()) {
+                println("Empty teacher data")
+            } else {
                 println("+-------------+----------------------+----------+------------+-----------------------+------------------+------+-------------+")
                 println("| ID          | Name                 | Gender   | DOB        | Address               |  Email           | GPA  | Scholarship |")
                 println("+-------------+----------------------+----------+------------+-----------------------+------------------+------+-------------+")
-                for (student in students) {
-                    student.showInfo()
+                for (teacher in teachers) {
+                    teacher.showInfo()
                 }
             }
 
-            6 -> TODO()
             7 -> TODO()
             8 -> TODO()
             0 -> println("Exiting program.")
@@ -72,3 +73,4 @@ fun main() {
     } while (choice != 0)
 
 }
+
