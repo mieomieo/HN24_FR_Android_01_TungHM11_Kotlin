@@ -27,17 +27,25 @@ fun deletePerson(students: MutableList<Student>, teachers: MutableList<Teacher>,
 //    }
 
     println("Delete person:")
-    println("Enter '1' to delete student, enter '2' to delete teacher: ")
-    val deleteOption = scanner.nextInt()
-    if (deleteOption == 1) {
-        deleteStudent(students, scanner)
-    } else if (deleteOption == 2) {
-//        deleteTeacher(teachers, scanner)
-    }
+    println("Enter '1' to delete student, enter '2' to delete teacher, enter \"0\" to return menu: ")
+
+    do {
+
+        val input = scanner.nextLine()
+        val deleteOption: Int? = input.toIntOrNull()
+        if (deleteOption == null) {
+            println("Invalid option. Please try again")
+            println("Enter '1' to delete student, enter '2' to delete teacher, enter \"0\" to return menu: ")
+        }
+        when (deleteOption) {
+            1 -> deleteStudent(students, scanner)
+//        2-> deleteTeacher(teachers, scanner)
+            0 -> return
+        }
+
+    } while (deleteOption == null)
+
 }
-
-
-
 
 
 fun editPerson(students: MutableList<Student>, teachers: MutableList<Teacher>, scanner: Scanner) {
@@ -67,24 +75,64 @@ fun editPerson(students: MutableList<Student>, teachers: MutableList<Teacher>, s
 //            }
 //        }
     println("Edit person:")
-    println("Enter '1' to edit student, enter '2' to edit teacher: ")
-    val editOption = scanner.nextInt()
-    if (editOption == 1) {
-        if(students.isEmpty()){
-            println("Empty student")
+    println("Enter '1' to edit student, enter '2' to edit teacher, enter \"0\" to return menu: ")
+    do {
+        val input = scanner.nextLine()
+        val editOption: Int? = input.toIntOrNull()
+        if (editOption == null) {
+            println("Invalid option. Please try again")
+            println("Enter '1' to edit student, enter '2' to edit teacher, enter \"0\" to return menu: ")
         }
-        else{
-            editStudent(students, scanner)
+        when (editOption) {
+            1 -> {
+                if (students.isEmpty()) {
+                    println("Empty data")
+                } else {
+                    editStudent(students, scanner)
+                }
+            }
+
+            2 -> TODO()
+            0 -> return
         }
 
-    } else if (editOption == 2) {
-        if(teachers.isEmpty()){
-            println("Empty student")
-        }
-        else{
+    } while (editOption == null)
 
+}
+fun sortPerson(students:MutableList<Student>, teachers: MutableList<Teacher>, scanner: Scanner ){
+    println("Sort person:")
+    println("Enter '1' to sort student, enter '2' to sort teacher, enter \"0\" to return menu: ")
+    do {
+        val input = scanner.nextLine()
+        val sortOption: Int? = input.toIntOrNull()
+        if (sortOption == null) {
+            println("Invalid option. Please try again")
+            println("Enter '1' to sort student, enter '2' to sort teacher, enter \"0\" to return menu: ")
         }
-//            editTeacher(teachers, scanner)
-    }
+        when (sortOption) {
+            1 -> {
+                if (students.isEmpty()) {
+                    println("Empty data")
+                } else {
+                    students.sortBy { it.name }
+                    println("+-------------+----------------------+----------+------------+-----------------------+------------------+------+-------------+")
+                    println("| ID          | Name                 | Gender   | DOB        | Address               |  Email           | GPA  | Scholarship |")
+                    println("+-------------+----------------------+----------+------------+-----------------------+------------------+------+-------------+")
+                    for (student in students) {
+                        student.showInfo()
+                    }
+                }
+            }
 
+            2 -> {
+                if (teachers.isEmpty()) {
+                    println("Empty data")
+                } else {
+                    teachers.sortBy { it.name }
+                }
+            }
+            0 -> return
+        }
+
+    } while (sortOption == null)
 }
