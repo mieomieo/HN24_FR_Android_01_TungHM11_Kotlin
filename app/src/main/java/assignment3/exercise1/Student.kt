@@ -3,6 +3,7 @@ package assignment3.exercise1
 import java.util.Scanner
 
 class Student : Person() {
+
     private var _studentId: String = ""
 
     var studentId: String
@@ -22,12 +23,26 @@ class Student : Person() {
         set(value) {
             _email = value
         }
-    private val idPrefix = "SV"
+
+    companion object {
+        val listId = mutableListOf<String>()
+    }
 
     override fun inputInfo() {
         val scanner = Scanner(System.`in`)
-        print("Enter student id: $idPrefix")
-        studentId = idPrefix + scanner.nextLine()
+
+        do {
+            print("Enter student ID (Prefix must be 'SV', e.g., SV01):")
+            studentId = readln()
+            if (!studentId.matches("^SV\\d++$".toRegex())) {
+                println("Invalid fomat.(Prefix must be 'SV', e.g., SV01)")
+            } else if (!isStudentIdUnique()) {
+                println("Student ID is already existed. Try again")
+            }
+        } while (!studentId.matches("^SV\\d++$".toRegex()) || !isStudentIdUnique())
+
+        listId.add(studentId)
+
         super.inputInfo()
 
         do {
@@ -61,6 +76,10 @@ class Student : Person() {
             }|"
         )
         println("+-------------+----------------------+----------+------------+-----------------------+------------------+------+-------------+")
+    }
+
+     fun isStudentIdUnique(): Boolean {
+        return !listId.contains(studentId)
     }
 
     fun setScholarship(): Boolean {
