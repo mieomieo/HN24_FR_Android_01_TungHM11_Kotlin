@@ -167,7 +167,6 @@ fun editPerson(students: MutableList<Student>, teachers: MutableList<Teacher>, s
 
 
         if (entityIndex != -1) {
-            // If the ID exists in the list, remove it from the listId
             val existingId = idExtractor(type[entityIndex])
             if (existingId in listId) {
                 listId.remove(existingId)
