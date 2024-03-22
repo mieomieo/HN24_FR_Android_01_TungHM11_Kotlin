@@ -11,11 +11,18 @@ class HouseTransaction(
     override fun addTransaction() {
         super.addTransaction()
         val scanner = Scanner(System.`in`)
-        println("Enter house type (Luxury, Premium, Normal):")
-        houseType = scanner.nextLine()
-        println("Enter address:")
-        address = scanner.nextLine()
+
+        do {
+            println("Enter house type (Luxury, Premium, Normal):")
+            houseType = scanner.nextLine().capitalize()
+        } while (houseType !in listOf("Luxury", "Premium", "Normal"))
+
+        do {
+            println("Enter address:")
+            address = scanner.nextLine()
+        } while (address.isBlank())
     }
+
 
     override fun displayTransaction() {
         super.displayTransaction()

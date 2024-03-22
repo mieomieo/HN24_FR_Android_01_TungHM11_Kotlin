@@ -10,8 +10,11 @@ class LandTransaction(
     override fun addTransaction() {
         super.addTransaction()
         val scanner = Scanner(System.`in`)
-        println("Enter land type (A, B, C):")
-        landType = scanner.nextLine()
+
+        do {
+            println("Enter land type (A, B, C):")
+            landType = scanner.nextLine().toUpperCase()
+        } while (landType !in listOf("A", "B", "C"))
     }
     override fun displayTransaction() {
         super.displayTransaction()

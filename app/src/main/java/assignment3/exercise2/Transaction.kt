@@ -17,32 +17,54 @@ open class Transaction(
         println("Enter transaction ID:")
         transactionId = scanner.nextLine()
 
-        var isValidDate = false
-        while (!isValidDate) {
+        var isValidDate: Boolean
+        do {
             println("Enter transaction date (dd/MM/yyyy):")
             val dateInput = scanner.nextLine()
-            if (isValidDate(dateInput)) {
+            isValidDate = isValidDate(dateInput)
+            if (isValidDate) {
                 transactionDate = dateInput
-                isValidDate = true
             } else {
                 println("Invalid date format. Please enter again.")
             }
-        }
+        } while (!isValidDate)
 
-        println("Enter unit price:")
-        unitPrice = scanner.nextDouble()
+        do {
+            println("Enter unit price:")
+            if (scanner.hasNextDouble()) {
+                unitPrice = scanner.nextDouble()
+                break
+            } else {
+                println("Invalid input. Please enter a valid number.")
+                scanner.next()
+            }
+        } while (true)
 
-        println("Enter area:")
-        area = scanner.nextDouble()
+        do {
+            println("Enter area:")
+            if (scanner.hasNextDouble()) {
+                area = scanner.nextDouble()
+                break
+            } else {
+                println("Invalid input. Please enter a valid number.")
+                scanner.next()
+            }
+        } while (true)
     }
+
 
     open fun displayTransaction() {
-        println("Transaction ID: $transactionId")
-        println("Transaction Date: $transactionDate")
-        println("Unit Price: $unitPrice")
-        println("Area: $area")
-    }
+        val transactionIdWidth = 14
+        val transactionDateWidth = 16
+        val unitPriceWidth = 17
+        val areaWidth = 10
 
+        println("-----------------------------------------------------------------------")
+        println("| Transaction ID | Transaction Date | Unit Price        | Area        |")
+        println("-----------------------------------------------------------------------")
+        println("| ${transactionId.padEnd(transactionIdWidth)} | ${transactionDate.padEnd(transactionDateWidth)} | ${unitPrice.toString().padEnd(unitPriceWidth)} | ${area.toString().padEnd(areaWidth)} |")
+        println("-----------------------------------------------------------------------")
+    }
     open fun calculatePrice(): Double {
         return 0.0
     }
