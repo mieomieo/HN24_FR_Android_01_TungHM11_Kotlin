@@ -1,18 +1,19 @@
 package assignment4.exercise5
 
-fun add(a: Long, b: Long): Long {
-    return a + b
+// MyKotlinFunctions.kt
+fun add(num1: Long, num2: Long): Long {
+    return num1 + num2
 }
 
-fun subtract(a: Long, b: Long): Long {
-    return a - b
+fun subtract(num1: Long, num2: Long): Long {
+    return num1 - num2
 }
 
-fun multiply(a: Long, b: Long): Long {
-    return a * b
+fun multiply(num1: Long, num2: Long): Long {
+    return num1 * num2
 }
 
-fun divide(a: Long, b: Long): Long {
-    require(b != 0L) { "Divisor cannot be zero" }
-    return a / b
+fun divide(num1: Long, num2: Long): Long {
+    require(num2 != 0L) { "Cannot divide by zero" }
+    return num1 / num2
 }
